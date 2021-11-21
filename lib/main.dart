@@ -25,15 +25,15 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home:  Home(),
+      home: Home(),
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        'register': (context) =>  Register(),
+        'register': (context) => Register(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        'login': (context) =>  Login(),
-        'home': (context) =>  Home(),
+        'login': (context) => Login(),
+        'home': (context) => Home(),
       },
     );
   }
