@@ -1,4 +1,6 @@
+import 'package:barber/home.dart';
 import 'package:barber/login.dart';
+import 'package:barber/register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,7 +27,14 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  Login(),
+      home:  Home(),
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        'register': (context) =>  Register(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        'login': (context) =>  Login(),
+        'home': (context) =>  Home(),
+      },
     );
   }
 }

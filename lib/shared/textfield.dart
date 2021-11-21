@@ -6,10 +6,10 @@ Widget LoginTextField({
   required TextEditingController controller,
   required String label ,
    bool isPass = false ,
-required String validateLabel
+required String? Function(String?) validate
 }){
   return TextFormField(
-    controller: controller,
+      controller: controller,
     keyboardType: keyboardType,
     obscureText:isPass ,
     style: const TextStyle(
@@ -34,12 +34,7 @@ required String validateLabel
         borderSide: BorderSide(width: 1,color: Colors.black),
       ),
     ),
-    validator: (value) {
-      if (value!.isEmpty) {
-        return validateLabel;
-      } else
-        return null;
-    },
+    validator: validate
   );
 
 }

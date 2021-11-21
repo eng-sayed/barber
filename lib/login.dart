@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:barber/shared/auth_button.dart';
+import 'package:barber/shared/constant.dart';
 import 'package:barber/shared/textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,14 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        //backgroundColor: Color(0x44000000),
+        elevation: 0,
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -41,10 +50,19 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginTextField(
+
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           label: 'Email',
-                          validateLabel: "Enter Email",
+                          validate: (value) {
+                            String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+                            RegExp regExp = new RegExp(p);
+                            if (value!.isEmpty || !regExp.hasMatch(value)) {
+                              return ('Please, Enter Email');
+                            } else
+                              return null;
+                          },
                         ),
                         SizedBox(
                           height: 12,
@@ -54,7 +72,12 @@ class _LoginState extends State<Login> {
                           keyboardType: TextInputType.visiblePassword,
                           isPass: isPass,
                           label: 'Password',
-                          validateLabel: "Enter Password",
+                          validate: (value) {
+                            if (value!.isEmpty || value.length<8) {
+                              return ('Password must be more 8 letter');
+                            } else
+                              return null;
+                          },
                           suffixIcon: IconButton(
                             icon: Icon(
                               isPass ? iconPass : Icons.visibility_off,
@@ -68,7 +91,15 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         SizedBox(height: 18,),
-
+                        MaterialButtonDesign(
+                            pressed: () {
+                              if(formkey.currentState!.validate()){
+                                print('rr');
+                              }
+                             },
+                            minWidth: SizeConfig.screenWidth! - 64,
+                            color: Colors.white,
+                            label: 'Login'),
                       ],
                     ),
                   ),
