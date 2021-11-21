@@ -50,14 +50,14 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginTextField(
-
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           label: 'Email',
                           validate: (value) {
-                            String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                            String p =
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-                            RegExp regExp = new RegExp(p);
+                            RegExp regExp = RegExp(p);
                             if (value!.isEmpty || !regExp.hasMatch(value)) {
                               return ('Please, Enter Email');
                             } else
@@ -73,7 +73,7 @@ class _LoginState extends State<Login> {
                           isPass: isPass,
                           label: 'Password',
                           validate: (value) {
-                            if (value!.isEmpty || value.length<8) {
+                            if (value!.isEmpty || value.length < 8) {
                               return ('Password must be more 8 letter');
                             } else
                               return null;
@@ -90,13 +90,15 @@ class _LoginState extends State<Login> {
                             },
                           ),
                         ),
-                        SizedBox(height: 18,),
+                        SizedBox(
+                          height: 18,
+                        ),
                         MaterialButtonDesign(
                             pressed: () {
-                              if(formkey.currentState!.validate()){
+                              if (formkey.currentState!.validate()) {
                                 print('rr');
                               }
-                             },
+                            },
                             minWidth: SizeConfig.screenWidth! - 64,
                             color: Colors.white,
                             label: 'Login'),
